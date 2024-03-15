@@ -15,9 +15,11 @@ DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,openaiapi-site.azureedge.net
 DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,stripe.com
-
+#claude规则
+DOMAIN,cdn.usefathom.com
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
+#谷歌Gemini规则
 DOMAIN-KEYWORD,gemini
 DOMAIN-KEYWORD,generativelanguage
 DOMAIN-KEYWORD,colab
