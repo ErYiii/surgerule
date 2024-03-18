@@ -22,13 +22,12 @@ DOMAIN-SUFFIX,claude.ai
 #谷歌Gemini规则
 DOMAIN-KEYWORD,gemini
 DOMAIN,generativelanguage.googleapis.com
+DOMAIN,aistudio.google.com
+DOMAIN,developers.google.com
 DOMAIN-KEYWORD,colab
 DOMAIN-SUFFIX,ai.google.dev
-DOMAIN-SUFFIX,chat.jiangbz.top
 DOMAIN-SUFFIX,markersuite.google.com
 DOMAIN-SUFFIX,apis.google.com
 DOMAIN-KEYWORD,developerprofiles
-DOMAIN-KEYWORD,googleapis
-DOMAIN-SUFFIX,aistudio.google.com
 DOMAIN-SUFFIX,fonts.gstatic.com
 
