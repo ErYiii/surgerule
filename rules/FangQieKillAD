@@ -1,0 +1,143 @@
+#!name=番茄小说去广告(终极静默版)
+#!desc=整合多源规则，全量启用 REJECT-DROP 静默丢弃，增强 extended-matching 匹配能力。
+#!category=Merged
+
+[Rule]
+# --- 核心功能白名单 (必须放在最前，确保书籍能打开) ---
+DOMAIN,imapi3-normal-lf.zijieapi.com,DIRECT
+# 如果听书/视频解锁章节失效，请取消下面这行的注释
+# DOMAIN-SUFFIX,fqnovelvod.com,DIRECT
+
+# --- 来自 zqzess & 可莉 (基础广告与精细化拦截 - 已升级为 DROP) ---
+DOMAIN,p6-ad-sign.byteimg.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,p9-ad-sign.byteimg.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,i-lq.snssdk.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,dig.bdurl.net,REJECT-DROP
+DOMAIN-KEYWORD,zijieapi,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,activity-ag.awemeughun.com,REJECT-DROP
+DOMAIN,mcs.snssdk.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,tnc3-alisc1.snssdk.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,security-lq.snssdk.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,tnc3-aliec2.snssdk.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,msync-im1-vip6-std.easemob.com,REJECT-DROP
+DOMAIN,apd-pcdnwxlogin.teg.tencent-cloud.net,REJECT-DROP
+DOMAIN,api.iegadp.qq.com,REJECT-DROP
+DOMAIN,sf3-ttcdn-tos.pstatp.com,REJECT-DROP
+DOMAIN-SUFFIX,pglstatp-toutiao.com,REJECT-DROP
+DOMAIN,*default.ixigua.com,REJECT-DROP
+DOMAIN,v6-novelapp.ixigua.com,REJECT-DROP
+DOMAIN,*novelapp.ixigua.com,REJECT-DROP
+DOMAIN-SUFFIX,byteorge.com,REJECT-DROP
+DOMAIN-SUFFIX,bytegoofy.com,REJECT-DROP
+DOMAIN-SUFFIX,bytedance.com,REJECT-DROP
+
+# 拦截字节 Gecko CDN (广告素材/直播流)
+DOMAIN-SUFFIX,bytegecko.com,REJECT-DROP,extended-matching,pre-matching
+# 拦截番茄内置商城/电商广告
+DOMAIN-SUFFIX,ecombdapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,ecomuser.snssdk.com,REJECT-DROP,extended-matching,pre-matching
+# 拦截悦动 CDN (P2P加速/视频广告 TCP 58001端口源头)
+DOMAIN-SUFFIX,ydycdn.com,REJECT-DROP
+# 拦截内嵌直播（会ban掉抖音直播）
+# DOMAIN-KEYWORD,webcast,REJECT-DROP,extended-matching,pre-matching
+
+# --- 补充：穿山甲 SDK 与 开屏广告 ---
+DOMAIN-SUFFIX,pangolin.snssdk.com,REJECT-DROP
+DOMAIN-SUFFIX,pangolin-sdk-toutiao-b.com,REJECT-DROP
+DOMAIN-SUFFIX,pangolin-sdk-toutiao.com,REJECT-DROP
+DOMAIN,sf3-pangolin-tos.pstatp.com,REJECT-DROP
+DOMAIN,sf6-pangolin-tos.pstatp.com,REJECT-DROP
+
+# --- 补充：遗漏的日志上报 (泛匹配解决 log0-log9 变体) ---
+DOMAIN-KEYWORD,applog-lq.fqnovel,REJECT-DROP,extended-matching,pre-matching
+DOMAIN-KEYWORD,applog.fqnovel,REJECT-DROP,extended-matching,pre-matching
+DOMAIN-KEYWORD,-misc-lq.fqnovel,REJECT-DROP
+DOMAIN-KEYWORD,-misc.fqnovel,REJECT-DROP
+DOMAIN-SUFFIX,log.byteoversea.com,REJECT-DROP
+DOMAIN-SUFFIX,mcs-bd.feishu.cn,REJECT-DROP
+DOMAIN,tosv.byted.org,REJECT-DROP
+DOMAIN,vcl-brain.snssdk.com,REJECT-DROP
+DOMAIN,mon-hl.snssdk.com,REJECT-DROP
+DOMAIN,mon-lq.snssdk.com,REJECT-DROP
+
+# --- 补充：动态配置与 ABTest ---
+DOMAIN-SUFFIX,abtestvm.bytedance.com,REJECT-DROP
+DOMAIN-SUFFIX,lf-cdn-tos.bytescm.com,REJECT-DROP
+
+# --- 来自 可莉 (其他精细化域名 - 已升级 DROP) ---
+DOMAIN,zlink.ugsdk.cn,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,mon.toutiaocloud.net,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,lf-normal-gr-sourcecdn.bytegecko.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,lf-webcast-gr-sourcecdn.bytegecko.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,p3-developer.bytemaimg.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,webcast-open.douyin.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,p11-webcast-sign.douyinpic.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,p3-webcast-sign.douyinpic.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,log3-applog.fqnovel.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,log5-applog.fqnovel.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,mon11-misc-lq.fqnovel.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,mon11-misc.fqnovel.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,mon3-misc.fqnovel.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,rtlog3-applog.fqnovel.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,rtlog5-applog.fqnovel.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,effect.snssdk.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,is-lq.snssdk.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,security.snssdk.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,vas.snssdk.com,REJECT-DROP,extended-matching,pre-matching,extended-matching,pre-matching
+DOMAIN,mon.toutiaocloud.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,abtest3-misc.zijieapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,ads3-normal.zijieapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,ads5-normal.zijieapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,feedback-c.zijieapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,gecko3.zijieapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,gecko5.zijieapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,ma.zijieapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,minigame3-normal.zijieapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,minigame5-normal.zijieapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,mssdk.zijieapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,timon.zijieapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,vcs.zijieapi.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,i.snssdk.com,REJECT-DROP,extended-matching,pre-matching
+DOMAIN,is.snssdk.com,REJECT-DROP,extended-matching,pre-matching
+
+# --- IP 拦截 (IP规则不支持 extended-matching，保持 no-resolve) ---
+IP-CIDR,49.71.37.101/32,REJECT-DROP,no-resolve
+IP-CIDR,117.71.105.23/32,REJECT-DROP,no-resolve
+IP-CIDR,218.94.207.205/32,REJECT-DROP,no-resolve
+IP-CIDR,117.92.229.188/32,REJECT-DROP,no-resolve
+IP-CIDR,101.36.166.16/32,REJECT-DROP,no-resolve
+IP-CIDR,180.96.2.114/32,REJECT-DROP,no-resolve
+IP-CIDR,103.13.228.0/24,REJECT-DROP,no-resolve
+IP-CIDR,103.13.229.0/24,REJECT-DROP,no-resolve
+
+# --- URL 正则拦截 (URL规则语法固定，使用 - reject 即可实现类似 drop 效果，或者保持原样) ---
+# 注意：Surge 的 URL-REGEX 默认行为通常就是阻断，这里保持标准写法
+URL-REGEX,*-default.ixigua.com,REJECT
+URL-REGEX,^http:\/\/.+\.byteimg\.com\/ad-app-package,REJECT
+URL-REGEX,^http:\/\/.+\.byteimg\.com\/web\.business\.image,REJECT
+URL-REGEX,^https?:\/\/.+\.zijieapi\.com\/api\/ad\/splash\/,REJECT
+URL-REGEX,^https?:\/\/.+\.snssdk\.com\/api\/ad\/splash\/,REJECT
+URL-REGEX,^https?:\/\/.+\.fqnovel\.com\/api\/ad\/splash\/,REJECT
+URL-REGEX,^https?:\/\/.+\.bytevcloud\.com\/.+\/ad\/,REJECT
+URL-REGEX,^https?:\/\/.+\.snssdk\.com\/video\/ads\/,REJECT
+
+[URL Rewrite]
+# --- 请求重写/阻断 (这里使用 - reject 是标准语法，等同于丢弃响应体) ---
+^https?:\/\/.+\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/(get_ads|stats|settings)\/ - reject
+^https?:\/\/.+\.pglstatp-toutiao\.com\/.+\/toutiao\.mp4 - reject
+^https?:\/\/.+\.pglstatp-toutiao|pstatp)\.com\/(obj|img)\/(ad-app-package|ad)\/.+ - reject
+^https?:\/\/.+\.pglstatp-toutiao|pstatp)\.com\/(obj|img)\/web\.business\.image\/.+ - reject
+^https?:\/\/.+\.pglstatp-toutiao|pstatp)\.com\/obj\/ad-pattern\/renderer - reject
+^https?:\/\/gurd\.snssdk\.com\/src\/server\/v3\/package - reject
+^https?:\/\/.+\.byteimg.com/tos-cn-i-1yzifmftcy\/(.+)-jpeg\.jpeg - reject
+^https?:\/\/.+\.pstatp\.com\/obj\/mosaic-legacy\/.+\?from\=ad - reject
+^https?:\/\/.+\.pstatp\.com\/bytecom\/resource\/track_log\/src\/.+ - reject
+^https?:\/\/.+\.snssdk\.com\/video\/play\/1\/toutiao\/.+\/mp4 - reject
+^https?:\/\/.+\.snssdk.com\/api\/ad\/.+ - reject
+^https?:\/\/.+?\.snssdk\.com\/motor\/operation\/activity\/display\/config\/V2\/ - reject
+^https?:\/\/.+\.pglstatp-toutiao|pstatp)\.com\/(ad-app-package|ad)\/.+ - reject
+^https?:\/\/adim\.pinduoduo\.com\/.+\/toutiao\?.+ - reject
+^https?:\/\/v(\d)+-novelapp\.fqnovelvod\.com\/.+\/video\/.+ - reject
+
+[MITM]
+hostname = %APPEND% *.pangolin-sdk-toutiao,*.pangolin-sdk-toutiao.*,*.pstatp.com,*.pstatp.com.*,*.pglstatp-toutiao.com.*,*.pglstatp-toutiao.com,gurd.snssdk.com,gurd.snssdk.com.*,*default.ixigua.com,adim.pinduoduo.com,*.fqnovelvod.com
