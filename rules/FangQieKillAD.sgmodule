@@ -31,10 +31,38 @@ DOMAIN-SUFFIX,byteorge.com,REJECT-DROP
 DOMAIN-SUFFIX,bytegoofy.com,REJECT-DROP
 DOMAIN-SUFFIX,pitaya.bytedance.com,REJECT-DROP
 
+#20280807-13:17
+[Rule]
+# ========== 番茄小说广告/追踪 精确拦截（替代粗暴的 DOMAIN-KEYWORD,zijieapi）==========
+
+# 广告服务器（ads）
+DOMAIN-KEYWORD,ads5-normal,REJECT
+DOMAIN-KEYWORD,ads5-oth,REJECT
+
+# 数据上报/埋点（bsync、abtest、mssdk）
+DOMAIN-KEYWORD,bsync3-normal,REJECT
+DOMAIN-KEYWORD,abtest3-misc,REJECT
+DOMAIN-KEYWORD,mssdk3-normal,REJECT
+
+# 北极星埋点系统（polaris）
+DOMAIN-KEYWORD,polaris5-normal,REJECT
+
+# 用户画像/推荐（saveu、imapi）
+DOMAIN-KEYWORD,saveu5-normal,REJECT
+DOMAIN-KEYWORD,imapi5-oth,REJECT
+
+# Gecko 动态化（仅拦截已知广告相关子域，不全局杀 bytegecko.com）
+DOMAIN-KEYWORD,gecko5-lq,REJECT
+
+# 电商广告图片/静态资源（如需保留抖音商城，可注释掉下面两条）
+# DOMAIN-SUFFIX,ecombdapi.com,REJECT
+# DOMAIN-SUFFIX,ecombdimg.com,REJECT
+# DOMAIN-SUFFIX,ecombdstatic.com,REJECT
+
 # 拦截字节 Gecko CDN (广告素材/直播流)
-DOMAIN-SUFFIX,bytegecko.com,REJECT-DROP,extended-matching,pre-matching
+#DOMAIN-SUFFIX,bytegecko.com,REJECT-DROP,extended-matching,pre-matching
 # 拦截番茄内置商城/电商广告
-DOMAIN-SUFFIX,ecombdapi.com,REJECT-DROP,extended-matching,pre-matching
+#DOMAIN-SUFFIX,ecombdapi.com,REJECT-DROP,extended-matching,pre-matching
 DOMAIN,ecomuser.snssdk.com,REJECT-DROP,extended-matching,pre-matching
 # 拦截悦动 CDN (P2P加速/视频广告 TCP 58001端口源头)
 DOMAIN-SUFFIX,ydycdn.com,REJECT-DROP
