@@ -29,7 +29,7 @@ DOMAIN,v6-novelapp.ixigua.com,REJECT-DROP
 DOMAIN,*novelapp.ixigua.com,REJECT-DROP
 DOMAIN-SUFFIX,byteorge.com,REJECT-DROP
 DOMAIN-SUFFIX,bytegoofy.com,REJECT-DROP
-DOMAIN-SUFFIX,bytedance.com,REJECT-DROP
+DOMAIN-SUFFIX,pitaya.bytedance.com,REJECT-DROP
 
 # 拦截字节 Gecko CDN (广告素材/直播流)
 DOMAIN-SUFFIX,bytegecko.com,REJECT-DROP,extended-matching,pre-matching
