@@ -1,30 +1,22 @@
-// Loon 资源解释器：仅补全 Trojan+WebSocket 且缺失 host 的节点
-function parse(resource) {
-    const lines = resource.split('\n');
-    const result = [];
-
-    for (let line of lines) {
-        // 1. 必须是 trojan 节点
-        const isTrojan = /^trojan\s*=/i.test(line);
+function operator(proxies = []) {
+  return proxies.map(proxy => {
+    // 仅处理 Trojan 协议节点
+    if (proxy.type === 'trojan') {
+      // 判断是否使用了 WebSocket 传输
+      // 兼容 Sub-Store 中可能使用的 network / transport 两种字段名
+      const network = String(proxy.network || proxy.transport || '').toLowerCase();
+      const isWS = network === 'ws' || network === 'websocket';
+      
+      if (isWS) {
+        // 获取 SNI 值（兼容 sni / servername / serverName 等可能的字段名）
+        const sni = proxy.sni || proxy.servername || proxy.serverName;
         
-        // 2. 必须是 WebSocket 传输 (Loon格式通常为 ws=true)
-        const isWs = /,\s*ws\s*=\s*true/i.test(line);
-        
-        // 3. 必须缺失 host 参数 (不存在host= 或 host=后面为空)
-        const missingHost = !/,\s*host\s*=\s*[^,\s]+/i.test(line);
-        
-        if (isTrojan && isWs && missingHost) {
-            // 提取 sni 的值
-            const sniMatch = line.match(/,\s*sni\s*=\s*([^,\s]+)/i);
-            if (sniMatch && sniMatch[1]) {
-                const sniValue = sniMatch[1].trim();
-                // 清理行尾空白后追加 host
-                line = line.replace(/\s*$/, '') + ', host=' + sniValue;
-            }
+        // 如果节点缺少 host 但存在 sni，则将 sni 的值赋给 host
+        if (!proxy.host && sni) {
+          proxy.host = sni;
         }
-        
-        result.push(line);
+      }
     }
-
-    return result.join('\n');
+    return proxy;
+  });
 }
