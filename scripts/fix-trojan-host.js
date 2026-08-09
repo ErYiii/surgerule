@@ -1,20 +1,16 @@
 function operator(proxies = []) {
   return proxies.map(proxy => {
-    // 仅处理 Trojan 协议节点
     if (proxy.type === 'trojan') {
-      // 判断是否使用了 WebSocket 传输
-      // 兼容 Sub-Store 中可能使用的 network / transport 两种字段名
-      const network = String(proxy.network || proxy.transport || '').toLowerCase();
-      const isWS = network === 'ws' || network === 'websocket';
-      
-      if (isWS) {
-        // 获取 SNI 值（兼容 sni / servername / serverName 等可能的字段名）
+      const net = String(proxy.network || '').toLowerCase();
+      if (net === 'ws') {
+        // 补充 host
         const sni = proxy.sni || proxy.servername || proxy.serverName;
-        
-        // 如果节点缺少 host 但存在 sni，则将 sni 的值赋给 host
-        if (!proxy.host && sni) {
+        if (sni) {
           proxy.host = sni;
         }
+        // 将 network 替换为 transport
+        proxy.transport = 'ws';
+        delete proxy.network;
       }
     }
     return proxy;
