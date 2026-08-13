@@ -3,8 +3,12 @@ payload:
 # date=2026-03-31 16:50:08
 # raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/rule/AI.list
 # OpenAI ChatGPT
-  - AND, ((DOMAIN-KEYWORD, chatgpt-async-webps-prod-), (DOMAIN-SUFFIX, webpubsub.azure.com))
-  - AND, ((DOMAIN-KEYWORD, openaicom-api-), (DOMAIN-SUFFIX, azurefd.net))
+  # - AND, ((DOMAIN-KEYWORD, chatgpt-async-webps-prod-), (DOMAIN-SUFFIX, webpubsub.azure.com))
+  # - AND, ((DOMAIN-KEYWORD, openaicom-api-), (DOMAIN-SUFFIX, azurefd.net))
+  - DOMAIN-KEYWORD,chatgpt-async-webps-prod-
+  - DOMAIN-SUFFIX,webpubsub.azure.com
+  - DOMAIN-KEYWORD,openaicom-api-
+  - DOMAIN-SUFFIX,azurefd.net
   - DOMAIN, chatgpt.livekit.cloud
   - DOMAIN, host.livekit.cloud
   - DOMAIN-SUFFIX, turn.livekit.cloud
